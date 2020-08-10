@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import API from '../../utils/API';
-import TableHeader from '../TableHeader/index.js';
-import Nav from '../Nav/index';
+import TableHeader from '../TableHeader';
+import Nav from '../Nav';
+
 
 const Table = () => {
     const [users, setUsers] = useState([]);
@@ -13,22 +14,22 @@ const Table = () => {
             setUsers(results.data.results)
             setFilteredUsers(results.data.results)
         })
-    }, [setSortOrder])
+    }, [setSortOrder]);
 
     const searchFilter = (e) => {
         const filter = e.target.value;
         const filteredUserList = users.filter(item => {
-            let values = Object.values(item).join("").toLocaleLowerCase();
-            return values.indexOf(filter.toLocaleLowerCase()) !== -1;
+            let values = Object.values(item).join("").toLowerCase();
+            return values.indexOf(filter.toLowerCase()) !== -1;
         });
-
         setFilteredUsers(filteredUserList);
     }
 
     const sortNames = (e) => {
-        if(sortOrder){
+        if (sortOrder) {
+            console.log('test button')
             setSortOrder('descend')
-            setFilteredUsers(filteredUsers.reverse());
+            setFilteredUsers(filteredUsers.reverse())
         }
     }
 
